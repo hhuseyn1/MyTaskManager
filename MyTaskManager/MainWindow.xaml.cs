@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
@@ -23,6 +24,20 @@ public partial class MainWindow : Window
 
     private void Btn_RunProcess(object sender, RoutedEventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(RunProcess_txtbox.Text) || string.IsNullOrEmpty(RunProcess_txtbox.Text))
+            return;
 
+        try
+        {
+            Process.Start(RunProcess_txtbox.Text);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+        finally
+        {
+            RunProcess_txtbox.Text = string.Empty;
+        }
     }
 }
