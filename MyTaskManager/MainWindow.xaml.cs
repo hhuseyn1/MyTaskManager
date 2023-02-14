@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace MyTaskManager
+namespace MyTaskManager;
+
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+   public ObservableCollection<Process> Processes { get; set; }
+   public List<string> BlackList { get; set; }
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        DataContext= this;
+        Processes = new(Process.GetProcesses());
+    }
+
+    private void Btn_AddBlist(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Btn_RunProcess(object sender, RoutedEventArgs e)
+    {
+
     }
 }

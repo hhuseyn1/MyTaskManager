@@ -14,7 +14,46 @@
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
-            <ListView Name="Tasks">
+            <ListView Name="Tasks" ItemsSource="{Binding Processes}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate >
+                                    <TextBlock Text="{Binding Id}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ProcessName}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Handle Count" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding HandleCount}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Thread Count" Width="170">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Threads.Count}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Machine Name" Width="180">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MachineName}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
             </ListView>
 
         </Grid>
@@ -40,7 +79,7 @@
             </Grid>
 
             <Grid Grid.Row="1" Grid.Column="2">
-                <Button Grid.Column="0" Grid.Row="1" Name="RunProcess_btn" Content="Run process" Background="MidnightBlue" Foreground="White" />
+                <Button Grid.Column="0" Grid.Row="1" Name="RunProcess_btn" Content="Run process" Background="MidnightBlue" Foreground="White" Click="Btn_RunProcess" />
             </Grid>
             
 
@@ -49,7 +88,7 @@
             </Grid>
             
             <Grid Grid.Row="1" Grid.Column="6">
-                <Button Grid.Column="0" Grid.Row="1" Name="AddBlackList_btn" Content="+Add black list" Background="MidnightBlue" Foreground="White" />
+                <Button Grid.Column="0" Grid.Row="1" Name="AddBlackList_btn" Content="+Add black list" Background="MidnightBlue" Foreground="White" Click="Btn_AddBlist"/>
             </Grid>
             
         </Grid>
