@@ -19,7 +19,10 @@ public partial class MainWindow : Window
 
     private void Btn_AddBlist(object sender, RoutedEventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(BlackList_txtbox.Text) || string.IsNullOrEmpty(BlackList_txtbox.Text))
+            return;
 
+        BlackList.Add(BlackList_txtbox.Text);
     }
 
     private void Btn_RunProcess(object sender, RoutedEventArgs e)
