@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MyTaskManager;
 
@@ -21,7 +22,6 @@ public partial class MainWindow : Window
     {
         if (string.IsNullOrWhiteSpace(BlackList_txtbox.Text) || string.IsNullOrEmpty(BlackList_txtbox.Text))
             return;
-
         BlackList.Add(BlackList_txtbox.Text);
     }
 
@@ -41,6 +41,21 @@ public partial class MainWindow : Window
         finally
         {
             RunProcess_txtbox.Text = string.Empty;
+        }
+    }
+
+    private void EndProcess_DClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+            //prosesin adinin uzerine 2 defe basanda isleyecek
+        if (Tasks.SelectedItem is Process process){
+            try
+            {
+                process.Kill();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
