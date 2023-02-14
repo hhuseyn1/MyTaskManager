@@ -1,4 +1,4 @@
-﻿using MVVM.Commands;
+﻿using Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +13,7 @@ namespace MyTaskManager;
 public partial class MainWindow : Window
 {
    public ObservableCollection<Process> Processes { get; set; }
-   public List<string> BlackList { get; set; }
+   public List<string>? BlackList { get; set; }
 
     public ICommand BLCommand { get; set; }
     public MainWindow()
@@ -22,8 +22,8 @@ public partial class MainWindow : Window
         DataContext= this;
         Processes = new(Process.GetProcesses());
         BLCommand = new RelayCommand(BLcommand);
-        var timer = new System.Timers.Timer();
-        timer.Interval = 5000;
+        Timer timer = new System.Timers.Timer();
+        timer.Interval = 3000;
 
         timer.Elapsed += TimerCloseBLProcesses;
         timer.Elapsed += TimerLoadProcess;
@@ -32,6 +32,7 @@ public partial class MainWindow : Window
 
     private void TimerCloseBLProcesses(object? sender, ElapsedEventArgs e)
     {
+        BlackList.Clear();
         Dispatcher.Invoke(() =>
         {
             foreach (var process in Processes)
@@ -57,7 +58,7 @@ public partial class MainWindow : Window
     {
         Dispatcher.Invoke(() =>
         {
-            Tasks.ItemsSource = null;
+            Processes.Clear();
             foreach (var process in Process.GetProcesses())
             {
                 Processes.Add(process);
